@@ -1,8 +1,12 @@
 import React, { useState, useContext } from 'react';
+import AlertContext from '../../context/alert/AlertContext';
 import GithubContext from '../../context/github/GithubContext';
 
 const UserSearch = () => {
   const { users, searchUsers, clearUsers } = useContext(GithubContext);
+
+  const { setAlert } = useContext(AlertContext);
+
   const [text, setText] = useState('');
 
   const handleTextChange = (e) => {
@@ -13,7 +17,7 @@ const UserSearch = () => {
     e.preventDefault();
 
     if (text === '') {
-      alert('Empty Query');
+      setAlert('Empty Query', 'error');
     } else {
       searchUsers(text);
       setText('');
